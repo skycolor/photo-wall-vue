@@ -1,6 +1,6 @@
 # photo-wall-vue
 
-> this is photo wall page by vue develop
+> 跟之前的react项目一样，都是一个相册的功能，只是这个使用的vue进行开发
 
 ## Build Setup
 
