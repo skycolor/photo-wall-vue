@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <MainPhotoWall></MainPhotoWall>
+    <main-photo-wall></main-photo-wall>
   </div>
 </template>
 
 <script>
-import MainPhotoWall from './components/MainPhotoWall'
+
+import mainPhotoWall from './components/MainPhotoWall'
 
 export default {
   name: 'app',
   components: {
-    MainPhotoWall
+   mainPhotoWall
   }
 }
 </script>

@@ -1,53 +1,53 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+	<section class="stage" ref="stage" >
+        <section class="img-sec">
+            <image-figure v-for="item in imgsArrangeArr" :key="item.id"  :arrange="item" >
+            	
+            </image-figure>
+        </section>
+        <nav class="controller-nav" >
+           	<controller-unit v-for="item in imgsArrangeArr" :key="item.id"  :arrange="item" >
+           		
+           	</controller-unit>
+        </nav>
+    </section>
 </template>
 
 <script>
+import imgsData from '../data/imageDatas.json';
+import imageFigure from './imageFigure.vue';
+import controllerUnit from './controllerUnit.vue';
+
 export default {
-  name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      imgsArrangeArr: []
     }
+  },
+  mounted(){
+  	this.imgsArrangeArr = (function(arr){
+  		for(var index = 0 , imgItem ; imgItem = arr[index++];){
+  			imgItem.imgUrl = require('../images/' + imgItem.imgName);
+  		}
+  		return arr;
+  	})(imgsData);
+  },
+  methods : {
+  	getRangeRandom(low , high){
+  		return Math.floor(Math.random()*(high - low) + low);
+  	} ,
+  	get30DegRandom(){
+  		return ((Math.random() > 0.5 ? '+' : '-') + Math.ceil(Math.random() * 30));
+  	}
+  } ,
+  components: {
+	imageFigure , controllerUnit
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style lang="scss">
+	@import '../styles/App.scss';
 </style>
+
