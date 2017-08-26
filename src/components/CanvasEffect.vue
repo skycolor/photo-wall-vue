@@ -1,53 +1,63 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+  	<div>
+	    <canvas id="canvas1" class="snow-canvas"></canvas>
+	    <canvas id="canvas2" class="snow-canvas"></canvas>
+	    <canvas id="canvas3" class="snow-canvas"></canvas>
+	</div>
 </template>
 
 <script>
+require('../lib/zepto.min.js');
+require('../lib/canvasLib');
+
 export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  mounted(){
+	this.handleCanvas1();
+	this.handleCanvas2();
+	this.handleCanvas3();
+	$(".snow-canvas").snow();
+  } ,
+  methods : {
+  	handleCanvas1(){
+  		$("#canvas1").attr({
+            speed : "1" ,
+            interaction : "false" ,
+            size : "5" ,
+            count : "100" ,
+            opacity : "0.00001" ,
+            "wind-power" : "0" ,
+            image : "false" ,
+            width : "1272" ,
+            height : "150"
+        });
+  	},
+  	handleCanvas2(){
+  		$("#canvas2").attr({
+            speed : "3" ,
+            interaction : "true" ,
+            size : "10" ,
+            count : "45" ,
+            opacity : "0.00001" ,
+            "wind-power" : "3" ,
+            image : "false" ,
+            width : "1272" ,
+            height : "150"
+        });
+  	},
+  	handleCanvas3(){
+  		const snowImg = require('../images/snow.png');
+  		$("#canvas3").attr({
+            speed : "3" ,
+            interaction : "true" ,
+            size : "12" ,
+            count : "35" ,
+            "wind-power" : "-5" ,
+            image : snowImg ,
+            width : "1272" ,
+            height : "150"
+        });
+  	}
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
